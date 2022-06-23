@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Themes/basic.theme" type="Theme" id=1]
+[ext_resource path="res://Assets/Scripts/BasicMenu.gd" type="Script" id=2]
+
+[node name="HowTo" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 130.0
+margin_right = 894.0
+margin_bottom = 600.0
+custom_constants/separation = 20
+alignment = 1
+
+[node name="Title" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_top = 175.0
+margin_right = 764.0
+margin_bottom = 199.0
+theme = ExtResource( 1 )
+text = "How to Play"
+align = 1
+
+[node name="Text" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_top = 219.0
+margin_right = 764.0
+margin_bottom = 378.0
+theme = ExtResource( 1 )
+text = "Connect all the items with matching colors.
+White elements do not connect.
+Cubes connect with the nearest object along the arrows.
+Left click on a cube to cycle through colors.
+Right click on a cube to change arrows directions.
+Some cube have fixed color or arrows directions or both."
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+margin_top = 398.0
+margin_right = 764.0
+margin_bottom = 424.0
+alignment = 1
+
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 262.0
+margin_right = 502.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 240, 0 )
+theme = ExtResource( 1 )
+text = "back to menu"
+
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/HBoxContainer/Button" to="." method="mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/HBoxContainer/Button" to="." method="mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/HBoxContainer/Button" to="." method="close_menu"]

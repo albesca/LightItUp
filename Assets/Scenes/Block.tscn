@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Scripts/Block.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Scenes/Ray.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Materials/Cube.material" type="Material" id=3]
+[ext_resource path="res://Assets/Meshes/cube.mesh" type="ArrayMesh" id=4]
+[ext_resource path="res://Assets/Meshes/cross.mesh" type="ArrayMesh" id=5]
+
+[sub_resource type="SphereShape" id=1]
+radius = 0.2
+
+[node name="Block" type="StaticBody" groups=[
+"active",
+"connecting",
+]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource( 1 )
+rotation_speed = 1
+
+[node name="RayCastSouth" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+cast_to = Vector3( 0, 0, 11 )
+collision_mask = 7
+
+[node name="RayCastNorth" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+cast_to = Vector3( 0, 0, -11 )
+collision_mask = 7
+
+[node name="RayCastEast" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+cast_to = Vector3( 11, 0, 0 )
+collision_mask = 7
+
+[node name="RayCastWest" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+cast_to = Vector3( -11, 0, 0 )
+collision_mask = 7
+
+[node name="RayCastSouthEast" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+cast_to = Vector3( 11, 0, 11 )
+collision_mask = 7
+
+[node name="RayCastNorthWest" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+cast_to = Vector3( -11, 0, -11 )
+collision_mask = 7
+
+[node name="RayCastNorthEast" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+cast_to = Vector3( 11, 0, -11 )
+collision_mask = 7
+
+[node name="RayCastSouthWest" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+cast_to = Vector3( -11, 0, 11 )
+collision_mask = 7
+
+[node name="Ray" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+visible = false
+color = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+shape = SubResource( 1 )
+
+[node name="Shape" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+mesh = ExtResource( 4 )
+material/0 = ExtResource( 3 )
+
+[node name="Cross" type="MeshInstance" parent="."]
+transform = Transform( 0.282843, 0, 0.282843, 0, 0.8, 0, -0.282843, 0, 0.282843, 0, 0.1, 0 )
+cast_shadow = 0
+mesh = ExtResource( 5 )
+material/0 = null
+__meta__ = {
+"_editor_description_": ""
+}
+
+[connection signal="input_event" from="." to="." method="change_color_or_rotation"]
+[connection signal="mouse_entered" from="." to="." method="mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="mouse_exited"]
