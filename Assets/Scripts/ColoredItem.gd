@@ -65,11 +65,14 @@ func check_connections():
 
 		if 'texture' in color_list[color].keys():
 			var texture = load(color_list[color]['texture'])
-			get_material().set("albedo_texture", texture)
+			for material in get_material_texture_list():
+				material.set("albedo_texture", texture)
 		else:
-			get_material().set("albedo_texture", null)
-
-		get_material().set("albedo_color", new_albedo_color)
+			for material in get_material_texture_list():
+				material.set("albedo_texture", null)
+		
+		for material in get_material_albedo_list():
+			material.set("albedo_color", new_albedo_color)
 
 
 func set_color(new_color):
@@ -89,5 +92,8 @@ func update_color(old_color, new_color):
 			add_to_group(color_list[new_color]['group'])
 
 
-func get_material():
-	return shape.material
+func get_material_albedo_list():
+	return [shape.material]
+
+func get_material_texture_list():
+	return [shape.material]

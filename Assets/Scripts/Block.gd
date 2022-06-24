@@ -198,8 +198,12 @@ func change_color_or_rotation(_camera, event, _click_position, _click_normal, \
 			$Cross.rotate_y(PI / 4.0)
 
 
-func get_material():
-	return shape.get("material/0")
+func get_material_albedo_list():
+	return [shape.get("material/0"), shape.get("material/1")]
+
+
+func get_material_texture_list():
+	return [shape.get("material/0")]
 
 
 func mouse_entered():

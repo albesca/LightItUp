@@ -17,7 +17,8 @@ func _process(delta):
 		if !connected and 'inactive_color' in color_list[color].keys():
 			new_albedo_color = color_list[color]['inactive_color']
 
-		get_material().set("albedo_color", new_albedo_color)
+		for material in get_material_albedo_list():
+			material.set("albedo_color", new_albedo_color)
 
 	$Shape.rotate_y(rotation_speed * delta)
 	if connected:

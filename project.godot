@@ -10,7 +10,7 @@ config_version=4
 
 [application]
 
-config/name="LostRelicGames Jam"
+config/name="Light It Up"
 run/main_scene="res://Assets/Scenes/Main.tscn"
 config/icon="res://icon.png"
 
