@@ -20,21 +20,22 @@ var color_list = {
 		'color': Color.red,
 		'inactive_color': Color.darkred,
 		'group': 'red',
-		'texture': 'res://Assets/Images/diamond_texture.png'
+		'texture': 'res://Assets/Images/RedLight.png',
+		'inactive_texture': 'res://Assets/Images/RedDark.png'
 	},
 	Colors.GREEN: {
 		'color': Color.green,
 		'inactive_color': Color.darkgreen,
 		'group': 'green',
-		'texture': 'res://Assets/Images/line_texture.png'
-
+		'texture': 'res://Assets/Images/GreenLight.png',
+		'inactive_texture': 'res://Assets/Images/GreenDark.png'
 	},
 	Colors.BLUE: {
-		'color': Color.cyan,
-		'inactive_color': Color.blue,
+		'color': Color.blue,
+		'inactive_color': Color.darkblue,
 		'group': 'blue',
-		'texture': 'res://Assets/Images/wave_texture.png'
-
+		'texture': 'res://Assets/Images/BlueLight.png',
+		'inactive_texture': 'res://Assets/Images/BlueDark.png'
 	},
 	Colors.NO_COLOR: {
 		'color': Color.white
@@ -63,8 +64,12 @@ func check_connections():
 		if !connected and 'inactive_color' in color_list[color].keys():
 			new_albedo_color = color_list[color]['inactive_color']
 
-		if 'texture' in color_list[color].keys():
+		if connected and 'texture' in color_list[color].keys():
 			var texture = load(color_list[color]['texture'])
+			for material in get_material_texture_list():
+				material.set("albedo_texture", texture)
+		elif !connected and 'inactive_texture' in color_list[color].keys():
+			var texture = load(color_list[color]['inactive_texture'])
 			for material in get_material_texture_list():
 				material.set("albedo_texture", texture)
 		else:

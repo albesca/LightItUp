@@ -8,7 +8,7 @@
 [ext_resource path="res://Assets/Materials/TopAndBottom.material" type="Material" id=6]
 
 [sub_resource type="SphereShape" id=1]
-radius = 0.2
+radius = 0.6
 
 [node name="Block" type="StaticBody" groups=[
 "active",
