@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Scripts/Wall.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Materials/Block.material" type="Material" id=2]
+[ext_resource path="res://Assets/Materials/TopAndBottom.material" type="Material" id=2]
 [ext_resource path="res://Assets/Meshes/wall.mesh" type="ArrayMesh" id=3]
-[ext_resource path="res://Assets/Materials/TopAndBottom.material" type="Material" id=4]
+[ext_resource path="res://Assets/Materials/HorizontalBand.material" type="Material" id=4]
 
 [sub_resource type="SpatialMaterial" id=1]
 resource_local_to_scene = true
@@ -33,5 +33,5 @@ shape = SubResource( 2 )
 
 [node name="Shape" type="MeshInstance" parent="."]
 mesh = ExtResource( 3 )
-material/0 = ExtResource( 2 )
-material/1 = ExtResource( 4 )
+material/0 = ExtResource( 4 )
+material/1 = ExtResource( 2 )
