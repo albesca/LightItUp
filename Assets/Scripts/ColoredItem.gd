@@ -13,6 +13,8 @@ export(Colors) var color setget set_color
 export var has_to_connect = false
 export var fixed_color = false
 export var fixed_rotation = false
+export var texture_shift_speed = 1.0
+export var shifting_texture = false
 
 var active = true
 var color_list = {
@@ -38,7 +40,8 @@ var color_list = {
 		'inactive_texture': 'res://Assets/Images/BlueDark.png'
 	},
 	Colors.NO_COLOR: {
-		'color': Color.white
+		'color': Color.white,
+		'inactive_color': Color.white
 	}
 
 }
@@ -60,24 +63,39 @@ func check_connections():
 	connections = []
 
 	if shape:
-		var new_albedo_color = color_list[color]['color']
-		if !connected and 'inactive_color' in color_list[color].keys():
+		var new_albedo_color = null
+		if connected and 'color' in color_list[color].keys():
+			new_albedo_color = color_list[color]['color']
+		elif !connected and 'inactive_color' in color_list[color].keys():
 			new_albedo_color = color_list[color]['inactive_color']
 
+		if new_albedo_color != null:
+			for material in get_material_albedo_list():
+				material.set("albedo_color", new_albedo_color)
+
+		var texture = null
 		if connected and 'texture' in color_list[color].keys():
-			var texture = load(color_list[color]['texture'])
-			for material in get_material_texture_list():
-				material.set("albedo_texture", texture)
+			texture = load(color_list[color]['texture'])
 		elif !connected and 'inactive_texture' in color_list[color].keys():
-			var texture = load(color_list[color]['inactive_texture'])
+			texture = load(color_list[color]['inactive_texture'])
+
+		if shifting_texture:
 			for material in get_material_texture_list():
-				material.set("albedo_texture", texture)
+				var texture_direction = Vector3.ZERO
+				var emission = 0
+				if connected:
+					texture_direction = Vector3.UP * texture_shift_speed
+					emission = 1
+
+				material.set_shader_param("texture_direction", \
+						texture_direction)
+				material.set_shader_param("albedo_texture", texture)
+				material.set_shader_param("emission_color", new_albedo_color)
+				material.set_shader_param("emission", emission)
 		else:
 			for material in get_material_texture_list():
-				material.set("albedo_texture", null)
-		
-		for material in get_material_albedo_list():
-			material.set("albedo_color", new_albedo_color)
+				material.set("albedo_texture", texture)
+
 
 
 func set_color(new_color):

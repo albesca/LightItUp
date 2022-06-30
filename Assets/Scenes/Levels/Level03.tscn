@@ -9,6 +9,15 @@ script = ExtResource( 1 )
 
 [node name="EmptyLevel" parent="." instance=ExtResource( 2 )]
 
+[node name="WallSouth" parent="EmptyLevel" index="4"]
+shifting_texture = false
+
+[node name="WallEast" parent="EmptyLevel" index="5"]
+texture_shift_speed = -1.0
+
+[node name="WallWest" parent="EmptyLevel" index="6"]
+shifting_texture = false
+
 [node name="Block" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2 )
 item_name = "block"

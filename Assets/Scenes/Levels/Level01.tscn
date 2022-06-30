@@ -12,14 +12,20 @@ script = ExtResource( 1 )
 [node name="WallNorth" parent="EmptyLevel" index="3"]
 color = -1
 has_to_connect = false
+shifting_texture = false
 
 [node name="WallSouth" parent="EmptyLevel" index="4"]
 color = 2
 has_to_connect = true
+texture_shift_speed = -1.0
 
 [node name="WallEast" parent="EmptyLevel" index="5"]
 color = -1
 has_to_connect = false
+shifting_texture = false
+
+[node name="WallWest" parent="EmptyLevel" index="6"]
+shifting_texture = false
 
 [node name="Block" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
